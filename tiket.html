@@ -499,6 +499,21 @@ padding:0 10px !important;
 font-size:10px !important;
 padding:7px 10px !important;
 }
+
+.event-info{padding:22px 18px 10px;background:#fff}
+.event-info h1{font-size:20px;font-weight:900;line-height:1.3;margin-bottom:8px;color:#111827}
+.event-info h2{font-size:14px;font-weight:700;color:#4b5563;line-height:1.5;margin-bottom:18px}
+.sub-title{font-size:18px;font-weight:800;color:#111827;margin-bottom:4px}
+.mini-title{font-size:13px;font-weight:600;color:#6b7280}
+.low-stock{display:inline-block;background:#fff7ed;color:#ea580c;padding:7px 12px;border-radius:10px;font-size:11px;font-weight:800;margin-top:8px;animation:pulseStock 1.2s infinite}
+@keyframes pulseStock{
+0%{transform:scale(1);box-shadow:0 0 0 0 rgba(234,88,12,.45)}
+70%{transform:scale(1.05);box-shadow:0 0 0 12px rgba(234,88,12,0)}
+100%{transform:scale(1);box-shadow:0 0 0 0 rgba(234,88,12,0)}
+}
+.footer-logo{width:100%;margin-top:10px}
+.footer-logo img{width:100%;display:block;border-radius:12px}
+
 </style>
 
 </head>
@@ -506,6 +521,13 @@ padding:7px 10px !important;
 <div class="hero">
 <h1>BIGU FESTIVAL 2026</h1>
 <p>4–5 Juli 2026 • Stadion Madya GBK Senayan Jakarta Selatan</p>
+</div>
+
+<div class="event-info">
+    <h1>BIGU FESTIVAL 2026 • MUSIK SAMBIL PIKNIK</h1>
+    <h2>4–5 JULI 2026<br>STADION MADYA GBK</h2>
+    <div class="sub-title">Tiket Tambahan</div>
+    <div class="mini-title">Pilih Tiket</div>
 </div>
 
 <div class="wrap">
@@ -544,17 +566,17 @@ padding:7px 10px !important;
 </div>
 
 <div class="card ticket-card">
-<span class="badge ready">DAY 1 PASS</span>
+<span class="badge ready">DAY 1 PASS</span><div class="low-stock">TIKET HAMPIR HABIS ⚠️</div>
 <h2>Normal Price</h2>
 <div class="ticket-divider"></div><div class="ticket-row"><div class="price">Rp225.000</div><button class="select-btn" onclick="showQty('q1',this)">Pilih Tiket</button><div id="q1" class="qty hidden"><button onclick="chg('d1',-1)">−</button><input id="d1" value="0" readonly><button onclick="chg('d1',1)">+</button></div></div></div>
 
 <div class="card ticket-card">
-<span class="badge ready">DAY 2 PASS</span>
+<span class="badge ready">DAY 2 PASS</span><div class="low-stock">TIKET HAMPIR HABIS ⚠️</div>
 <h2>Normal Price</h2>
 <div class="ticket-divider"></div><div class="ticket-row"><div class="price">Rp225.000</div><button class="select-btn" onclick="showQty('q2',this)">Pilih Tiket</button><div id="q2" class="qty hidden"><button onclick="chg('d2',-1)">−</button><input id="d2" value="0" readonly><button onclick="chg('d2',1)">+</button></div></div></div>
 
 <div class="card ticket-card">
-<span class="badge ready">2 DAY PASS</span>
+<span class="badge ready">2 DAY PASS</span><div class="low-stock">TIKET HAMPIR HABIS ⚠️</div>
 <h2>Normal Price</h2>
 <div class="ticket-divider"></div><div class="ticket-row"><div class="price">Rp395.000</div><button class="select-btn" onclick="showQty('q3',this)">Pilih Tiket</button><div id="q3" class="qty hidden"><button onclick="chg('pass',-1)">−</button><input id="pass" value="0" readonly><button onclick="chg('pass',1)">+</button></div></div></div>
 
@@ -567,6 +589,9 @@ padding:7px 10px !important;
 <div id="total" style="font-size:22px;font-weight:800">Rp 0</div>
 </div>
 <button class="btn" onclick="checkout()">BELI TIKET</button>
+<div class="footer-logo">
+<img src="logo.png" alt="logo">
+</div>
 </div>
 
 <script>
