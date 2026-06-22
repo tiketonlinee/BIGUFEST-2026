@@ -603,11 +603,37 @@ if(v<0)v=0;if(v>10)v=10;
 e.value=v;update();
 }
 function update(){
-let a=+d1.value,b=+d2.value,c=+pass.value;
-let q=a+b+c,t=a*225000+b*225000+c*395000;
-qtyText.innerText='Jumlah ('+q+' tiket)';
-total.innerText='Rp '+t.toLocaleString('id-ID');
-localStorage.setItem('totalPembayaran',t);
+let a = +d1.value,
+    b = +d2.value,
+    c = +pass.value;
+
+// total & qty
+let q = a + b + c;
+let t = a*225000 + b*225000 + c*395000;
+
+// UI tetap
+qtyText.innerText = 'Jumlah ('+q+' tiket)';
+total.innerText = 'Rp ' + t.toLocaleString('id-ID');
+
+// simpan data lama (biar kompatibel)
+localStorage.setItem('totalPembayaran', t);
+localStorage.setItem('jumlahTiket', q);
+
+// jenis tiket
+let jenis = [];
+if(a > 0) jenis.push("Day 1 ("+a+")");
+if(b > 0) jenis.push("Day 2 ("+b+")");
+if(c > 0) jenis.push("2 Day Pass ("+c+")");
+
+localStorage.setItem('jenisTiket', jenis.join(', '));
+
+// versi advanced (multi-ticket object)
+let items = [];
+if(a > 0) items.push({nama:"Day 1 Pass", qty:a, harga:225000});
+if(b > 0) items.push({nama:"Day 2 Pass", qty:b, harga:225000});
+if(c > 0) items.push({nama:"2 Day Pass", qty:c, harga:395000});
+
+localStorage.setItem('checkout_items', JSON.stringify(items));
 }
 function showQty(id,btn){
 document.getElementById(id).classList.remove('hidden');
