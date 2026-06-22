@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LATIHAN PESTAPORA-MAKASAR - Pembayaran QRIS</title>
+<title>BIGU FESTIVAL 2026 - Pembayaran QRIS</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
 
-body{
+body{overflow-x:hidden;
 background:
 radial-gradient(circle at top left, rgba(255,215,0,.12), transparent 35%),
 linear-gradient(135deg,#12051f,#2d0b45,#4c1d95,#7e22ce);
@@ -248,7 +248,7 @@ String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
 
 if(duration<=0){
 alert('Waktu pembayaran telah habis.');
-window.location.href='index.html';
+window.location.href='bigu success.html';
 return;
 }
 
@@ -283,7 +283,7 @@ btn.addEventListener('click',()=>{
 document.getElementById('loading').style.display='flex';
 
 setTimeout(()=>{
-window.location.href='loading.html';
+window.location.href='bigu loading.html';
 },36000);
 });
 </script>
