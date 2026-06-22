@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sunset di Kebun</title>
+
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,sans-serif
+}
+
+body{
+height:100vh;
+overflow:hidden;
+background:#000;
+}
+
+
+/* BACKGROUND MENGGUNAKAN logo.png */
+.hero{
+height:100vh;
+background:
+linear-gradient(90deg,rgba(0,0,0,.80),rgba(0,0,0,.35)),
+url("logo.png");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+display:flex;
+align-items:center;
+padding:28px;
+color:white;
+}
+
+
+.content{
+max-width:520px;
+z-index:2;
+}
+
+
+.brand{
+letter-spacing:3px;
+font-size:14px;
+margin-bottom:25px;
+opacity:.8;
+}
+
+
+h1{
+font-size:clamp(48px,12vw,80px);
+line-height:.9;
+margin-bottom:20px;
+}
+
+
+h1 span{
+color:#f5c451;
+}
+
+
+p{
+font-size:18px;
+line-height:1.5;
+margin-bottom:25px;
+}
+
+
+.promo{
+display:inline-block;
+background:white;
+color:#111;
+padding:12px 22px;
+border-radius:30px;
+font-weight:800;
+margin-bottom:25px;
+}
+
+
+.btn{
+display:inline-block;
+background:#fff;
+color:#111;
+text-decoration:none;
+padding:15px 35px;
+border-radius:14px;
+font-weight:800;
+transition:.3s;
+}
+
+
+.btn:hover{
+transform:scale(1.05);
+}
+
+
+@media(max-width:600px){
+
+.hero{
+text-align:center;
+justify-content:center;
+padding:20px;
+background-position:center;
+}
+
+.content{
+max-width:100%;
+}
+
+h1{
+font-size:55px;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<section class="hero">
+
+<div class="content">
+
+<div class="brand">
+BIGU FESTIVAL 2026
+</div>
+
+
+<h1>
+PICNIC<br>
+<span>5 SPECIAL 5 SHOW</span>
+</h1>
+
+
+<div class="promo">
+BUY 1 GET 1
+</div>
+
+
+<p>
+Music Show with Green, Conservation and Culture Movement.<br>
+Nikmati pengalaman event bersama orang favoritmu.
+</p>
+
+
+<a class="btn" href="deskripsi.html">
+Pesan Tiket
+</a>
+
+
+</div>
+
+</section>
+
+
+</body>
+</html>
