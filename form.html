@@ -48,6 +48,7 @@ input,select,textarea{width:100%;padding:16px;margin-top:8px;border-radius:16px;
 <div class="card">
 <div class="title">Ringkasan Pesanan</div>
 <div class="summary-row"><span>Jenis Tiket</span><strong id="jenisTiket">-</strong></div>
+<div id="detailTiket"></div>
 <div class="summary-row"><span>Jumlah Tiket</span><strong id="jumlahTiket">0</strong></div>
 <div class="summary-row total"><span>Total</span><span id="totalBayar">Rp0</span></div>
 </div>
@@ -81,15 +82,31 @@ input,select,textarea{width:100%;padding:16px;margin-top:8px;border-radius:16px;
 <div id="loading">Sedang memproses...</div>
 
 <script>
+const items = JSON.parse(localStorage.getItem('checkout_items') || "[]");
 const total = localStorage.getItem('totalPembayaran') || 0;
 const jumlahTiket = localStorage.getItem('jumlahTiket') || 0;
-const jenisTiket = localStorage.getItem('jenisTiket') || '-';
 
 document.getElementById('totalBayar').innerText =
 'Rp' + Number(total).toLocaleString('id-ID');
 
 document.getElementById('jumlahTiket').innerText = jumlahTiket;
-document.getElementById('jenisTiket').innerText = jenisTiket;
+
+// render detail tiket
+let htmlDetail = '';
+items.forEach(item=>{
+  let subtotal = item.qty * item.harga;
+  htmlDetail += `
+  <div class="summary-row">
+    <span>${item.nama} (${item.qty})</span>
+    <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong>
+  </div>`;
+});
+
+document.getElementById('detailTiket').innerHTML = htmlDetail;
+
+// jenis tiket text
+let jenis = items.map(i=>`${i.nama} (${i.qty})`).join(', ');
+document.getElementById('jenisTiket').innerText = jenis || '-';
 
 document.getElementById('lanjut').onclick=function(){
 
