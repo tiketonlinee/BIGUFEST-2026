@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Ticket Festival</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+
+body{
+  background:#4b2c5e;
+  background-image:radial-gradient(circle at top, #6a3f7a, #2d1636);
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+/* CARD */
+.card{
+  width:90%;
+  max-width:380px;
+  border-radius:28px;
+  padding:24px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(20px);
+  text-align:center;
+}
+
+/* TITLE */
+.title{
+  font-weight:800;
+  font-size:20px;
+  margin-bottom:5px;
+}
+
+.sub{
+  font-size:12px;
+  opacity:.7;
+  margin-bottom:15px;
+}
+
+/* INFO */
+.info{
+  font-size:13px;
+  margin:5px 0;
+  opacity:.85;
+}
+
+/* QR */
+.qr{
+  background:#fff;
+  padding:14px;
+  border-radius:16px;
+  margin:20px auto;
+  display:inline-block;
+}
+
+/* BADGE */
+.badge{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  background:#FFD700;
+  color:#000;
+  font-size:11px;
+  font-weight:600;
+  margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="badge">DAY 1 • BIGU FESTIVAL</div>
+
+<div class="title">E-Ticket Entry</div>
+<div class="sub">Tunjukkan QR saat masuk</div>
+
+<div class="info" id="nama"></div>
+<div class="info" id="order"></div>
+<div class="info" id="total"></div>
+
+<div class="qr">
+  <img id="qr" width="180">
+</div>
+
+</div>
+
+<script>
+// AMBIL DATA REAL DARI QRIS
+const nama = localStorage.getItem("nama");
+const order = localStorage.getItem("order");
+const total = localStorage.getItem("totalPembayaran");
+
+// VALIDASI BIAR GAK KOSONG
+if(!nama || !order){
+  alert("Data tidak ditemukan, kembali ke form!");
+}
+
+// TAMPILKAN
+document.getElementById("nama").innerText = "Nama: " + nama;
+document.getElementById("order").innerText = "Order ID: " + order;
+document.getElementById("total").innerText = "Total: Rp " + Number(total).toLocaleString('id-ID');
+
+// QR DARI ORDER ID (REAL)
+const qrData = encodeURIComponent(order);
+document.getElementById("qr").src =
+`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${qrData}`;
+</script>
+
+</body>
+</html>
