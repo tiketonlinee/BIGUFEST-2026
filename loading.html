@@ -1,23 +1,188 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pending Verifikasi</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memproses Pembayaran</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
-body{overflow-x:hidden;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at top left, rgba(255,215,0,.12), transparent 35%),linear-gradient(135deg,#12051f,#2d0b45,#4c1d95,#7e22ce);color:#fff}
-.card{max-width:600px;width:100%;text-align:center;background:rgba(255,255,255,.12);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.15);border-radius:28px;padding:35px}
-.icon{font-size:70px;margin-bottom:15px}
-h1{color:#FFD700;margin-bottom:10px}
-.info{line-height:1.8;margin-top:15px}
-.badge{display:inline-block;background:rgba(255,215,0,.15);padding:10px 18px;border-radius:999px;margin:15px 0;color:#FFD700;font-weight:700}
-</style></head>
-<body><div class="card">
-<div class="icon">⏳</div>
-<h1>Pembayaran Sedang Diverifikasi</h1>
-<div class="badge">STATUS: PENDING</div>
-<div class="info">
-<p>Terima kasih. Bukti pembayaran telah berhasil dikirim.</p>
-<p>Tim kami akan melakukan verifikasi pembayaran Anda secepatnya.</p>
-<p>Mohon simpan Order ID dan tunggu konfirmasi melalui WhatsApp atau Email.</p>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,215,0,.08), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(0,255,174,.08), transparent 40%),
+    #0f172a;
+  color:#fff;
+}
+
+.card{
+  width:100%;
+  max-width:500px;
+  padding:36px;
+  border-radius:28px;
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(30px);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+h1{
+  text-align:center;
+  font-size:20px;
+  font-weight:700;
+}
+
+.sub{
+  text-align:center;
+  font-size:13px;
+  opacity:.6;
+  margin-top:4px;
+  margin-bottom:20px;
+}
+
+.user{
+  text-align:center;
+  font-size:13px;
+  opacity:.7;
+  margin-bottom:20px;
+}
+
+.step-item{
+  display:flex;
+  align-items:center;
+  margin-bottom:16px;
+  opacity:.35;
+  transition:.4s ease;
+}
+
+.step-item.active{opacity:1;}
+.step-item.done{opacity:1;}
+
+.circle{
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-right:10px;
+  font-size:12px;
+}
+
+.done .circle{
+  background:#00ffae;
+  color:#000;
+  border:none;
+}
+
+.progress{
+  margin-top:20px;
+  height:4px;
+  background:rgba(255,255,255,0.08);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#FFD700,#00ffae);
+  transition:1s cubic-bezier(.4,0,.2,1);
+}
+
+.timer{
+  text-align:center;
+  margin-top:12px;
+  font-size:12px;
+  opacity:.5;
+}
+
+.dots::after{
+  content:"";
+  animation:dots 1.5s infinite;
+}
+
+@keyframes dots{
+  0%{content:""}
+  33%{content:"."}
+  66%{content:".."}
+  100%{content:"..."}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Memproses Pembayaran</h1>
+<div class="sub dots">Menghubungkan ke sistem</div>
+
+<div class="user">
+  <div id="nama"></div>
+  <div id="order"></div>
 </div>
-</div></body></html>
+
+<div class="step">
+  <div class="step-item active" id="s1"><div class="circle">1</div>Validasi Data</div>
+  <div class="step-item" id="s2"><div class="circle">2</div>Verifikasi Pembayaran</div>
+  <div class="step-item" id="s3"><div class="circle">3</div>Menyiapkan Tiket</div>
+</div>
+
+<div class="progress">
+  <div class="bar" id="bar"></div>
+</div>
+
+<div class="timer">
+  Proses selesai dalam <span id="t">30</span> detik
+</div>
+
+</div>
+
+<script>
+if(!localStorage.getItem("nama")){
+  localStorage.setItem("nama","Demo User");
+}
+if(!localStorage.getItem("order")){
+  localStorage.setItem("order","ORD123456");
+}
+
+const nama = localStorage.getItem("nama");
+const order = localStorage.getItem("order");
+
+document.getElementById("nama").innerText = nama;
+document.getElementById("order").innerText = order;
+
+setTimeout(()=>{s1.classList.add("done"); s2.classList.add("active"); bar.style.width="35%";},4000);
+setTimeout(()=>{s2.classList.add("done"); s3.classList.add("active"); bar.style.width="75%";},11000);
+setTimeout(()=>{s3.classList.add("done"); bar.style.width="100%";},18000);
+
+let time=30;
+const tEl=document.getElementById("t");
+
+const interval=setInterval(()=>{
+  time--;
+  tEl.innerText=time;
+
+  if(time<=0){
+    clearInterval(interval);
+    window.location.href="success.html";
+  }
+},1000);
+</script>
+
+</body>
+</html>
